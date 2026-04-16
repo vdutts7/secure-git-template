@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -eo pipefail
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+[[ "$(git config core.hooksPath 2>/dev/null)" != ".hooks" ]] && git config --local include.path ../.gitconfig
+
+if command -v shelllock >/dev/null 2>&1 && [[ "${SHELLLOCK_VERIFIED:-}" != "1" ]]; then
+  shelllock -m "Push to remote?" true || { echo "[pre-push] BLOCKED - Touch ID denied"; exit 1; }
+fi
+
+HEALTH="$ROOT/.hooks/scripts/health-check.sh"
+if [[ -x "$HEALTH" ]]; then
+  echo "[pre-push] health check"
+  "$HEALTH" || exit $?
+fi
+
+if git config --local --get filter.git-crypt.required >/dev/null 2>&1 && command -v git-crypt >/dev/null 2>&1; then
+  GC_OUT="$(git-crypt status -f 2>&1 || true)"
+  if [[ "$GC_OUT" == *"still unencrypted"* || "$GC_OUT" == *"WARNING"* ]]; then
+    echo "[pre-push] BLOCKED - git-crypt warnings detected"
+    echo "$GC_OUT" >&2
+    exit 1
+  fi
+fi
+
+if command -v git-lfs >/dev/null 2>&1; then
+  git lfs pre-push "$@" || exit $?
+fi

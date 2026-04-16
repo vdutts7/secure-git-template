@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eo pipefail
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+SHORT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "initial")
+BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || echo "detached")
+ORIGINAL_MSG=$(python3 - "$1" <<'EOF'
+from pathlib import Path
+import sys
+text = Path(sys.argv[1]).read_text() if Path(sys.argv[1]).exists() else ''
+print(' '.join(text.split()))
+EOF
+)
+ORIGINAL_MSG_ESC=$(printf '%s' "$ORIGINAL_MSG" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read())[1:-1])')
+FILES_CHANGED=$(git diff --cached --name-only 2>/dev/null | python3 -c 'import sys; print(",".join(line.strip() for line in sys.stdin if line.strip()))')
+printf '{"ts":"%s","branch":"%s","hash":"%s","msg":"%s","files":"%s"}
+' "$TIMESTAMP" "$BRANCH" "$SHORT_HASH" "$ORIGINAL_MSG_ESC" "$FILES_CHANGED" >> "$ROOT/.commits.jsonl"
+printf '..
+' > "$1"
+printf '[commit-msg] .. (logged to .commits.jsonl)
+'

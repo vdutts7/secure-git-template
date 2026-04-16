@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eo pipefail
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+[[ "$(git config core.hooksPath 2>/dev/null)" != ".hooks" ]] && git config --local include.path ../.gitconfig
+
+CLEARMETA="$ROOT/.hooks/scripts/clearmeta.sh"
+if [[ -x "$CLEARMETA" ]]; then
+  staged=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null)
+  if [[ -n "$staged" ]]; then
+    while IFS= read -r f; do
+      [[ -f "$f" && "$f" != ".git/"* ]] && "$CLEARMETA" -q "$f" 2>/dev/null && git add "$f" 2>/dev/null || true
+    done <<< "$staged"
+    echo "[pre-commit] metadata stripped"
+  fi
+fi
+
+exit 0
