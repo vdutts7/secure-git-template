@@ -1,4 +1,4 @@
-# private-git-template
+# secure-git-template
 
 Forge-agnostic private Git repo template with:
 
