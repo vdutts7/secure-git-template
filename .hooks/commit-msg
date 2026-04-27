@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
+if [[ "$(git config --local --get hooks.pseudoEncryptCommits 2>/dev/null || true)" != "true" ]]; then
+  exit 0
+fi
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 SHORT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "initial")

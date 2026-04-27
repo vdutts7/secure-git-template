@@ -49,7 +49,10 @@ if [[ -x "$CLEARMETA" ]]; then
   staged=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null)
   if [[ -n "$staged" ]]; then
     while IFS= read -r f; do
-      [[ -f "$f" && "$f" != ".git/"* ]] && "$CLEARMETA" -q "$f" 2>/dev/null && git add "$f" 2>/dev/null || true
+      case "$f" in
+        .git/*|.hooks/*|.commits.jsonl|.gitattributes|.gitignore|.gitconfig) continue ;;
+      esac
+      [[ -f "$f" ]] && "$CLEARMETA" -q "$f" 2>/dev/null && git add "$f" 2>/dev/null || true
     done <<< "$staged"
     echo "🪝 pre-commit: metadata stripped"
   fi
