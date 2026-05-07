@@ -1,12 +1,18 @@
 <div align="center">
 
-<h1>private-git-template</h1>
-<p><i><b>opinionated private-repo bootstrap with one command setup</b></i></p>
+<img src="https://raw.githubusercontent.com/vdutts7/squircle/refs/heads/main/webp/material-icons/git.webp" alt="logo" width="80" height="80" />
 
-[![GitHub][github]][github-url]
-[![Homebrew][homebrew]][homebrew-url]
+<h1>secure-git-template</h1>
+<p><i><b>opinionated private repo bootstrap with one command setup</b></i></p>
+
+
+<a href="https://github.com/vdutts7/homebrew-tap"><img src="./assets/badges/shelllock.badge.svg" alt="shelllock" height="34" /></a> &nbsp;
+<a href="https://github.com/AGWA/git-crypt"><img src="./assets/badges/git-crypt.badge.svg" alt="git-crypt" height="34" /></a> &nbsp; 
+
 
 </div>
+
+<br/>
 
 ## Table Of Contents
 
@@ -67,9 +73,6 @@ ___
 
 ## Requirements
 
-- `git`
-- `bash`
-- `python3`
 - `shelllock`
 - `git-crypt`
 - `git-lfs`
@@ -78,10 +81,9 @@ ___
 
 ## Contact
 
-- **repo** - [private-git-template][github-url]
-- **issues** - [open an issue](https://github.com/vdutts7/private-git-template/issues)
+<a href="https://vd7.io"><img src="https://res.cloudinary.com/ddyc1es5v/image/upload/v1773910810/readme-badges/readme-badge-vd7.png" alt="vd7.io" height="40" /></a> &nbsp; <a href="https://x.com/vdutts7"><img src="https://res.cloudinary.com/ddyc1es5v/image/upload/v1773910817/readme-badges/readme-badge-x.png" alt="/vdutts7" height="40" /></a>
 
-[github]: https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
-[github-url]: https://github.com/vdutts7/private-git-template
+[git]: https://img.shields.io/badge/Git-181717?style=for-the-badge&logo=github&logoColor=white
+[github-url]: https://github.com/vdutts7/secure-git-template
 [homebrew]: https://img.shields.io/badge/Homebrew-FBB040?style=for-the-badge&logo=homebrew&logoColor=black
 [homebrew-url]: https://github.com/vdutts7/homebrew-tap
