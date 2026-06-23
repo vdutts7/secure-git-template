@@ -79,6 +79,13 @@ ___
 
 ___
 
+## Tools Used
+
+<img src="https://img.shields.io/badge/git--crypt-FF5722?style=for-the-badge&logo=git&logoColor=white" alt="git-crypt"/>
+<img src="https://img.shields.io/badge/Git%20LFS-F05032?style=for-the-badge&logo=gitlfs&logoColor=white" alt="Git LFS"/>
+
+<br/>
+
 ## Contact
 
 <a href="https://vd7.io"><img src="https://res.cloudinary.com/ddyc1es5v/image/upload/v1773910810/readme-badges/readme-badge-vd7.png" alt="vd7.io" height="40" /></a> &nbsp; <a href="https://x.com/vdutts7"><img src="https://res.cloudinary.com/ddyc1es5v/image/upload/v1773910817/readme-badges/readme-badge-x.png" alt="/vdutts7" height="40" /></a>
